@@ -56,7 +56,7 @@
                     toast('Subscribed successfully.');
                     console.info('Push notification subscribed.');
                     console.log(subscription);
-                    //saveSubscriptionID(subscription);
+                    saveSubscriptionID(subscription);
                     changePushStatus(true);
                 })
                 .catch(function (error) {
@@ -85,7 +85,7 @@
                                 toast('Unsubscribed successfully.');
                                 console.info('Push notification unsubscribed.');
                                 console.log(subscription);
-                                //deleteSubscriptionID(subscription);
+                                deleteSubscriptionID(subscription);
                                 changePushStatus(false);
                             })
                             .catch(function (error) {
