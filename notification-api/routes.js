@@ -5,6 +5,8 @@ function routes(app) {
 
     app.get('/api', User.welcome);
 
+    app.get('/api/users', User.getUsers);
+    app.get('/api/user/:user_id', User.getUser);
     app.post('/api/users', User.createUser);
     app.delete('/api/user/:user_id', User.deleteUser);
 

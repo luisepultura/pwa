@@ -38,5 +38,6 @@
       "type": "image/png",
       "sizes": "48x48"
     }
-  ]
+  ],
+  "gcm_sender_id": "119241510440"
 }

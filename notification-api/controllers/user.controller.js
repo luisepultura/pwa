@@ -41,6 +41,15 @@ function deleteUser(req, res, next) {
     // });
 }
 
+function getUser(req, res) {
+    res.json({ success: true, user: user.find({ user_id: req.params.user_id }) });
+}
+
+function getUsers(req, res) {
+    res.json({ success: true, users: user.getAll() });
+}
+
+
 module.exports = {
 
     /**
@@ -66,5 +75,8 @@ module.exports = {
      * @param  next
      * @return json
      */
-    deleteUser
+    deleteUser,
+
+    getUser,
+    getUsers
 };
