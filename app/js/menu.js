@@ -1,16 +1,15 @@
-(function () {
-  'use strict';
+export const menu = () => {
 
-  var menuIconElement = document.querySelector('.header__icon');
-  var menuElement = document.querySelector('.menu');
-  var menuOverlayElement = document.querySelector('.menu__overlay');
+  const menuIconElement = document.querySelector('.header__icon');
+  const menuElement = document.querySelector('.menu');
+  const menuOverlayElement = document.querySelector('.menu__overlay');
 
   //Menu click event
   menuIconElement.addEventListener('click', showMenu, false);
   menuOverlayElement.addEventListener('click', hideMenu, false);
   menuElement.addEventListener('transitionend', onTransitionEnd, false);
 
-   //To show menu
+  //To show menu
   function showMenu() {
     menuElement.style.transform = "translateX(0)";
     menuElement.classList.add('menu--show');
@@ -25,20 +24,20 @@
     menuElement.addEventListener('transitionend', onTransitionEnd, false);
   }
 
-  var touchStartPoint, touchMovePoint;
+  let touchStartPoint, touchMovePoint;
 
   /*Swipe from edge to open menu*/
 
   //`TouchStart` event to find where user start the touch
-  document.body.addEventListener('touchstart', function(event) {
+  document.body.addEventListener('touchstart', function (event) {
     touchStartPoint = event.changedTouches[0].pageX;
     touchMovePoint = touchStartPoint;
   }, false);
 
   //`TouchMove` event to determine user touch movement
-  document.body.addEventListener('touchmove', function(event) {
+  document.body.addEventListener('touchmove', function (event) {
     touchMovePoint = event.touches[0].pageX;
-    if (touchStartPoint < 10 && touchMovePoint > 30) {          
+    if (touchStartPoint < 10 && touchMovePoint > 30) {
       menuElement.style.transform = "translateX(0)";
     }
   }, false);
@@ -47,7 +46,7 @@
     if (touchStartPoint < 10) {
       menuElement.style.transform = "translateX(0)";
       menuOverlayElement.classList.add('menu__overlay--show');
-      menuElement.removeEventListener('transitionend', onTransitionEnd, false); 
+      menuElement.removeEventListener('transitionend', onTransitionEnd, false);
     }
   }
-})();
+};
