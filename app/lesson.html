@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Lessons</title>
+    <title>Family</title>
 </head>
 
 <body>
@@ -14,51 +14,28 @@
                 <path d="M0 0h24v24H0z" fill="none"/>
             </svg>
         </span>
-        <nav class="navigation">
-            <div class="dropdownBackground">
-                <span class="arrow"></span>
-            </div>
-
-            <ul class="content">
-                <li>
-                    <a href="#" class="content__title">Lessons</a>
-                    <ul class="dropdown lessons">
-                        <li>
-                            <span class="code">Numbers</span>
-                            <a href="lesson.html">React For Beginners</a>
-                        </li>
-                        <li>
-                            <span class="code">Greetings</span>
-                            <a href="lesson.html">ES6 For Everyone</a>
-                        </li>
-                        <li>
-                            <span class="code">Family</span>
-                            <a href="lesson.html">Sublime Text Power User</a>
-                        </li>
-                        <li>
-                            <span class="code">Colours</span>
-                            <a href="lesson.html">What The Flexbox?!</a>
-                        </li>
-                        <li>
-                            <span class="code">Food</span>
-                            <a href="lesson.html">Learn Redux</a>
-                        </li>
-                        <li>
-                            <span class="code">Restaurant</span>
-                            <a href="lesson.html">Command Line Power User</a>
-                        </li>
-                        <li>
-                            <span class="code">Feelings</span>
-                            <a href="lesson.html">Mastering Markdown</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        <span class="header__title no--select">Family</span>
     </header>
 
 
     <style>
+        /*html {
+    box-sizing: border-box;
+    font-family: "Arial Rounded MT Bold","Helvetica Rounded",Arial,sans-serif
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+      linear-gradient(45deg, hsla(340, 100%, 55%, 1) 0%, hsla(340, 100%, 55%, 0) 70%),
+      linear-gradient(135deg, hsla(225, 95%, 50%, 1) 10%, hsla(225, 95%, 50%, 0) 80%),
+      linear-gradient(225deg, hsla(140, 90%, 50%, 1) 10%, hsla(140, 90%, 50%, 0) 80%),
+      linear-gradient(315deg, hsla(35, 95%, 55%, 1) 100%, hsla(35, 95%, 55%, 0) 70%);
+  }*/
+        
         *,
         *::after,
         *::before {
@@ -110,7 +87,7 @@
         }
         
         header {
-            position: fixed;
+            /*position: fixed;*/
             width: 100%;
             height: 56px;
             top: 0;
@@ -121,7 +98,8 @@
             display: flex;
             align-content: center;
             align-items: center;
-            overflow: visible;
+            justify-content: center;
+            overflow: hidden;
             z-index: 1;
             color: #fff;
             -webkit-user-select: none;
@@ -132,8 +110,14 @@
             transition: background-color 250ms linear;
         }
         
+        h2 {
+            margin-top: 0;
+            padding-top: .8em;
+        }
+        
         nav {
-            flex: 1 0 0;
+            position: absolute;
+            perspective: 600px;
         }
         
         .home__icon {
@@ -152,9 +136,24 @@
             cursor: pointer;
         }
         
-        .content__title {
+        .header__title {
             color: yellow;
             font-size: 20px;
+            -ms-flex-item-align: center;
+            -ms-grid-row-align: center;
+            align-self: center;
+            margin-left: 10px;
+        }
+        
+        .content>li>a {
+            color: yellow;
+            text-decoration: none;
+            font-size: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 20px;
+            display: inline-block;
+            margin: 20px;
+            border-radius: 5px;
         }
         
         nav ul {
@@ -176,9 +175,10 @@
             position: absolute;
             overflow: hidden;
             padding: 20px;
+            top: -20px;
             border-radius: 2px;
             transition: all 0.5s;
-            transform: translateY(20px);
+            transform: translateY(100px);
             will-change: opacity;
             display: none;
         }
@@ -210,12 +210,12 @@
         }
         
         .arrow {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 20px 20px 20px;
-            border-color: transparent transparent springgreen transparent;
-            transform: translateY(-100%);
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            display: block;
+            background: lightblue;
+            transform: translateY(-50%) rotate(45deg);
         }
         
         .lessons {
@@ -250,9 +250,7 @@
     <script>
         const triggers = document.querySelectorAll('.content > li');
         const background = document.querySelector('.dropdownBackground');
-        const contenTitle = document.querySelector('.content__title');
-        const nav = document.querySelector('.navigation');
-
+        const nav = document.querySelector('.top');
 
         function handleEnter() {
             this.classList.add('trigger-enter');
@@ -261,21 +259,13 @@
 
             const dropdown = this.querySelector('.dropdown');
             const dropdownCoords = dropdown.getBoundingClientRect();
-            const contenTitleCoords = contenTitle.getBoundingClientRect();
             const navCoords = nav.getBoundingClientRect();
-
-            // const coords = {
-            //     height: dropdownCoords.height,
-            //     width: dropdownCoords.width,
-            //     top: dropdownCoords.top - contenTitleCoords.top,
-            //     left: dropdownCoords.left - contenTitleCoords.left
-            // };
 
             const coords = {
                 height: dropdownCoords.height,
                 width: dropdownCoords.width,
-                top: navCoords.bottom,
-                left: dropdownCoords.left - navCoords.left,
+                top: dropdownCoords.top - navCoords.top,
+                left: dropdownCoords.left - navCoords.left
             };
 
             background.style.setProperty('width', `${coords.width}px`);
