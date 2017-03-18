@@ -69,10 +69,8 @@
 /******/ ({
 
 /***/ 6:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 const numbers = [
     { character: '一', pinyin: 'yī', svg: '', english: 'One' },
     { character: '二', pinyin: 'èr', svg: '', english: 'Two' },
@@ -123,22 +121,35 @@ const lessons = [
 
 const dropdownLiTemplate = ({ code, title }) =>
     `<li>
-        <span class="code">${title}</span>
-        <a href="${code}">${title}</a>
+        <span class="code" data-code="${code}">${title}</span>
     </li>`;
 
 
-const dropdownLessonsTemplate = lessons.map(dropdownLiTemplate).join('');
-/* harmony export (immutable) */ __webpack_exports__["dropdownLessonsTemplate"] = dropdownLessonsTemplate;
+const lessonItemTemplate = ({ english, character, pinyin }) =>
+    `<section class="lesson">
+        <h4>${english}</h4>
+        <h4>${character}</h4>
+        <h4>${pinyin}</h4>        
+    </section>`;
 
+const dropdownLessonsTemplate = lessons.map(dropdownLiTemplate).join('');
+const numbersTemplate = numbers.map(lessonItemTemplate).join('');
 
 (console.log(dropdownLessonsTemplate));
 
 
+
+const dropdown = document.querySelector('.dropdown');
+const lessonContainer = document.querySelector('.lesson_container');
 const triggers = document.querySelectorAll('.content > li');
 const background = document.querySelector('.dropdownBackground');
 const contenTitle = document.querySelector('.content__title');
 const nav = document.querySelector('.navigation');
+
+dropdown.innerHTML = dropdownLessonsTemplate;
+lessonContainer.innerHTML = numbersTemplate;
+
+const codes = document.querySelectorAll('.code');
 
 
 function handleEnter() {
@@ -168,11 +179,17 @@ function handleLeave() {
     background.classList.remove('open');
 }
 
+const handleCodeClick = e => {
+    const { code } = e.target.dataset;
+    codes.forEach(c => c.removeEventListener('click', handleCodeClick));
+    dropdown.innerHTML = lessons.filter(lesson => lesson.code !== code).map(dropdownLiTemplate).join('');
+    document.querySelectorAll('.code').forEach(c => c.addEventListener('click', handleCodeClick));
+    console.log(code);
+};
+
 triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
 triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
-
-document.querySelector('.dropdown').innerHTML = dropdownLessonsTemplate;
-
+codes.forEach(code => code.addEventListener('click', handleCodeClick));
 
 /***/ }),
 
