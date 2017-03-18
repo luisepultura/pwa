@@ -10,7 +10,8 @@ module.exports = {
             './app/js/toast.js',
             './app/js/latest.js',
             './app/js/menu.js',
-            './app/js/offline.js']
+            './app/js/offline.js'],
+        home: ['./app/js/templating.js']
     },
     output: {
         filename: '[name].js',
@@ -20,7 +21,7 @@ module.exports = {
         loaders: [
             {
                 //
-                test: path.resolve(__dirname , 'js'),
+                test: path.resolve(__dirname, 'js'),
                 loader: 'babel-loader',
                 query: {
                     presets: ["es2015"],

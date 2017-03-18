@@ -23,34 +23,6 @@
                 <li>
                     <a href="#" class="content__title">Lessons</a>
                     <ul class="dropdown lessons">
-                        <li>
-                            <span class="code">Numbers</span>
-                            <a href="lesson.html">React For Beginners</a>
-                        </li>
-                        <li>
-                            <span class="code">Greetings</span>
-                            <a href="lesson.html">ES6 For Everyone</a>
-                        </li>
-                        <li>
-                            <span class="code">Family</span>
-                            <a href="lesson.html">Sublime Text Power User</a>
-                        </li>
-                        <li>
-                            <span class="code">Colours</span>
-                            <a href="lesson.html">What The Flexbox?!</a>
-                        </li>
-                        <li>
-                            <span class="code">Food</span>
-                            <a href="lesson.html">Learn Redux</a>
-                        </li>
-                        <li>
-                            <span class="code">Restaurant</span>
-                            <a href="lesson.html">Command Line Power User</a>
-                        </li>
-                        <li>
-                            <span class="code">Feelings</span>
-                            <a href="lesson.html">Mastering Markdown</a>
-                        </li>
                     </ul>
                 </li>
             </ul>
@@ -246,44 +218,7 @@
             margin-bottom: 10px;
         }
     </style>
-
-    <script>
-        const triggers = document.querySelectorAll('.content > li');
-        const background = document.querySelector('.dropdownBackground');
-        const contenTitle = document.querySelector('.content__title');
-        const nav = document.querySelector('.navigation');
-
-
-        function handleEnter() {
-            this.classList.add('trigger-enter');
-            setTimeout(() => this.classList.contains('trigger-enter') && this.classList.add('trigger-enter-active'), 400);
-            background.classList.add('open');
-
-            const dropdown = this.querySelector('.dropdown');
-            const dropdownCoords = dropdown.getBoundingClientRect();
-            const contenTitleCoords = contenTitle.getBoundingClientRect();
-            const navCoords = nav.getBoundingClientRect();
-
-            const coords = {
-                height: dropdownCoords.height,
-                width: dropdownCoords.width,
-                top: navCoords.bottom,
-                left: dropdownCoords.left - navCoords.left,
-            };
-
-            background.style.setProperty('width', `${coords.width}px`);
-            background.style.setProperty('height', `${coords.height}px`);
-            background.style.setProperty('transform', `translate(${coords.left}px, ${coords.top}px)`);
-        }
-
-        function handleLeave() {
-            this.classList.remove('trigger-enter', 'trigger-enter-active');
-            background.classList.remove('open');
-        }
-
-        triggers.forEach(trigger => trigger.addEventListener('mouseenter', handleEnter));
-        triggers.forEach(trigger => trigger.addEventListener('mouseleave', handleLeave));
-    </script>
+    <script src="./dist/home.js"></script>
 
 </body>
 
