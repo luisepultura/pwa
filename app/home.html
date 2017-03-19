@@ -29,7 +29,7 @@
         </nav>
     </header>
 
-    <section class="lesson_container">
+    <section class="lesson__container">
     </section>
 
     <style>
@@ -70,6 +70,10 @@
             margin-top: 20px;
             margin-bottom: 30px;
             font-weight: 500;
+        }
+        
+        h1 {
+            margin: 10px;
         }
         /* MAIN styles */
         
@@ -236,7 +240,22 @@
         }
         
         .lesson {
-            width: 80%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-direction: column;
+            width: 35%;
             min-height: 130px;
             background: #fff;
             margin: 20px auto;
@@ -244,6 +263,11 @@
             border-radius: 2px;
             position: relative;
             padding: 4px 1em;
+        }
+
+        .lesson__item-icon{
+            width: 120px;
+            height: 120px;
         }
     </style>
     <script src="./dist/home.js"></script>

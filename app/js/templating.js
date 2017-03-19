@@ -54,9 +54,10 @@ const dropdownLiTemplate = ({ code, title }) =>
 
 const lessonItemTemplate = ({ english, character, pinyin }) =>
     `<section class="lesson">
-        <h4>${english}</h4>
-        <h4>${character}</h4>
-        <h4>${pinyin}</h4>        
+        <h1>${pinyin}</h1> 
+        <h1>${character}</h1>
+        <img class="lesson__item-icon" src="./images/numbers/one.svg" >
+        <h1>${english}</h1>
     </section>`;
 
 const dropdownLessonsTemplate = lessons.map(dropdownLiTemplate).join('');
@@ -67,7 +68,7 @@ const numbersTemplate = numbers.map(lessonItemTemplate).join('');
 
 
 const dropdown = document.querySelector('.dropdown');
-const lessonContainer = document.querySelector('.lesson_container');
+const lessonContainer = document.querySelector('.lesson__container');
 const triggers = document.querySelectorAll('.content > li');
 const background = document.querySelector('.dropdownBackground');
 const contenTitle = document.querySelector('.content__title');
