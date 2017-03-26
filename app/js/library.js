@@ -1,4 +1,4 @@
-const library = {
+export const lessons = {
     numbers,
     family,
     greetings,
@@ -37,11 +37,11 @@ const colours = [
     { character: '五', pinyin: 'wǔ', svg: '', english: 'Five' },
 ];
 
-export const lessons = [
+export const themes = [
     { code: 'numbers', title: 'Numbers' },
     { code: 'family', title: 'Family' },
     { code: 'greetings', title: 'Greetings' },
     { code: 'colours', title: 'Colours' }
 ];
 
-export const getLesson = code => library[code];
+export const getLesson = code => lessons[code];

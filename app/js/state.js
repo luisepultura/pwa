@@ -1,4 +1,4 @@
-import { lessons } from './library'
+import { themes, getLesson } from './library'
 
 //store
 const createStore = reducer => {
@@ -42,43 +42,39 @@ const combineReducers = (reducers) => {
 
 //reducers
 
-const visibilityFilter = (state = 'HIDE_ALL', action) => {
+const lessonReducer = (state = { index: 0 }, action) => {
     const { code } = action;
+    const { index } = state;
+    const lesson = getLesson(code);
     switch (action.type) {
         case 'NEXT':
-
-            return [
-
-            ];
+            if (lesson.length - 1 === index) {
+                return { code, index: 0, lesson: lesson[0], };
+            }
+            return { code, index: index + 1, lesson: lesson[index + 1], };
         case 'PREVIOUS':
-            return action.filter;
-        case 'GO_TO':
-            return action.filter;
+            if (index === 0) {
+                return { code, index: lesson.length - 1, lesson: lesson[lesson.length - 1], };
+            }
+            return { code, index: index - 1, lesson: lesson[index - 1], };
         default:
             return state;
     }
 };
 
-const lessonsReducer = (state = lessons, action) => {
+const themeReducer = (state = themes, action) => {
     const { code } = action;
     switch (action.type) {
         case 'GO_TO':
-            return state.map(lesson => ({ code: lesson.code, title: lesson.title, display: lesson.code === code }));
+            return state.map(theme => ({ code: theme.code, title: theme.title, display: theme.code === code }));
         default:
-            return state.map(lesson => ({ code: lesson.code, title: lesson.title, display: false }));
+            return state.map(theme => ({ code: theme.code, title: theme.title, display: false }));
     }
 };
 
-const lessonsApp = (state = {}, action) => {
-    return {
-        lessons: lessonsReducer(
-            state.lessons,
-            action
-        )
-    };
-};
+const App = combineReducers({ themeReducer, lessonReducer });
 
-const store = createStore(lessonsApp);
+const store = createStore(App);
 
 console.log('Initial state:');
 console.log(store.getState());
@@ -95,3 +91,34 @@ store.dispatch({ type: 'GO_TO', code: 'greetings' });
 console.log('Current state:');
 console.log(store.getState());
 console.log('-------------');
+
+
+console.log('Initial state:');
+console.log(store.getState());
+console.log('-------------');
+
+console.log('Dispatching GO_TO.');
+store.dispatch({ type: 'GO_TO', code: 'family' });
+console.log('Current state:');
+console.log(store.getState());
+console.log('-------------');
+
+console.log('Dispatching GO_TO.');
+store.dispatch({ type: 'GO_TO', code: 'greetings' });
+console.log('Current state:');
+console.log(store.getState());
+console.log('-------------');
+
+console.log('Dispatching NEXT.');
+store.dispatch({ type: 'NEXT', code: 'greetings' });
+console.log('Current state:');
+console.log(store.getState());
+console.log('-------------');
+
+console.log('Dispatching NEXT.');
+store.dispatch({ type: 'NEXT', code: 'greetings' });
+console.log('Current state:');
+console.log(store.getState());
+console.log('-------------');
+
+//https://plnkr.co/edit/MTY7XxTzlUWilCcpo4AB?p=preview
